@@ -2,6 +2,8 @@
 
 Comparison of five repositories analysed for Python usage, purpose, dependencies, architecture, and target use case.
 
+Python-primary repositories: 4 out of 5. The one exclusion is airbyte.
+
 | Repository | Python % | Python Primary? | Domain | Primary Purpose | Key Dependencies | Architecture Patterns | Target Use Case |
 |------------|----------|-----------------|--------|-----------------|------------------|-----------------------|-----------------|
 | aiokafka | 93.3% | Yes | Distributed Streaming | Async Python client for Apache Kafka with `AIOKafkaProducer` and `AIOKafkaConsumer` integrated with `asyncio` | async-timeout, packaging, typing-extensions, Cython, cramjam, gssapi | Async/await, layered wire protocol, optional C-extension, consumer group coordinator | Real-time event-driven microservices in Python |
