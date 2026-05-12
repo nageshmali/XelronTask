@@ -26,8 +26,6 @@ This PR fixes that by giving the coordinator its own separate socket. Now commit
 - `aiokafka/consumer/group_coordinator.py` – main file changed. it now opens its own connection instead of sharing one
 - `aiokafka/consumer/consumer.py` – two new methods added here: `seek_to_beginning()` and `seek_to_end()`
 - `aiokafka/consumer/fetcher.py` – small update to support the new seek methods
-- `tests/test_consumer.py` – new tests for the seek methods and to check commits are not getting delayed
-- `CHANGES.rst` – changelog updated under v0.3.0
 
 ### Implementation Approach
 
@@ -55,11 +53,8 @@ The fix is pretty simple – just wrap the commit call in a try/except so if it 
 
 - `aiokafka/consumer/group_coordinator.py` – two changes here: added try/except around `commit_offsets()` inside `_on_join_prepare()`, and fixed the `session_timeout_ms` not being passed correctly to the constructor
 - `tests/test_consumer.py` – test added that makes a commit fail during `_on_join_prepare` to confirm the consumer still rejoins fine
-- `CHANGES.rst` – two changelog entries added under v0.4.x
 
 ### Implementation Approach
-
-The issue was that `_on_join_prepare()` was calling `await self.commit_offsets()` with no try/except around it. If the broker returned an error (timeout, rebalance already in progress, etc.), this would throw an exception. That exception then went up the call stack through `_do_rejoin_group` and into `_coordination_routine` which killed the background coordination task completely.
 
 The fix wraps that commit call in a try/except. If it fails, it just logs a warning and moves on to the rejoin. The rejoin still happens normally. This is the same way the official Java Kafka client handles this situation – the commit before a rejoin is considered best effort, not a hard requirement.
 
