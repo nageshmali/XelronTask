@@ -1,51 +1,11 @@
-  ----------------------------------------------------------------------------------------------------------------------------------------------------
-  Repository                        Python %    Python     Domain         Primary purpose      Key dependencies     Architecture       Target use case
-                                               primary?                                                             patterns           
-  ------------------------------- ---------- ------------- -------------- -------------------- -------------------- ------------------ ---------------
-  aiokafka (`aio-libs/aiokafka`)       93.1%      Yes      Distributed    Async Python client  async-timeout,       Async/await        Backend/data
-                                                           streaming      for Apache Kafka --- packaging,           coroutine I/O;     engineers
-                                                                          provides             typing-extensions,   layered Kafka      building
-                                                                          `AIOKafkaProducer`   Cython (build),      wire-protocol;     real-time
-                                                                          and                  cramjam (optional),  optional           event-driven
-                                                                          `AIOKafkaConsumer`   gssapi (optional)    C-extension;       microservices
-                                                                          integrated with                           consumer group     in async Python
-                                                                          `asyncio`                                 coordinator;       (FastAPI,
-                                                                                                                    pluggable codec    aiohttp)
-                                                                                                                    registry           
+# GitHub Repository Comparison
 
-  airbyte (`airbytehq/airbyte`)        51.3%      No       Data           ELT/ETL data         Kotlin/Gradle,       Polyglot platform; Data engineers
-                                                           integration /  pipeline platform    airbyte-cdk          connector plugin   centralising
-                                                           ELT            with 600+ connectors (Python), Docker,    model;             data from
-                                                                          --- Python for       Pydantic             microservices;     APIs/DBs to
-                                                                          CDK/connectors,                           low-code/no-code   warehouses
-                                                                          Kotlin/Java for core                      CDK                
-                                                                          runtime                                                      
+Comparison of five repositories analysed for Python usage, purpose, dependencies, architecture, and target use case.
 
-  archivematica                        83.0%      Yes      Digital        Standards-based      Django, Celery,      Django MVC (MTV);  Archives,
-  (`artefactual/archivematica`)                            preservation   digital preservation MySQL, FITS/JHOVE,   distributed task   libraries,
-                                                                          system (OAIS/BagIt)  FFmpeg,              pipeline; FPR;     museums,
-                                                                          --- ingest,          pytest-django        command pattern;   government
-                                                                          normalise, and store                      storage            agencies
-                                                                          digital objects                           abstraction        needing
-                                                                                                                                       long-term
-                                                                                                                                       digital
-                                                                                                                                       preservation
-
-  beets (`beetbox/beets`)              96.2%      Yes      Music library  CLI music library    mutagen,             Plugin/hook event  Music
-                                                           management     manager and          musicbrainzngs,      system; CLI        enthusiasts and
-                                                                          MusicBrainz          jellyfish, confuse,  subcommand         developers
-                                                                          auto-tagger ---      requests, pyyaml     framework;         managing
-                                                                          catalogs, corrects                        SQLite-backed ORM; personal music
-                                                                          metadata, organises                       path-template      collections
-                                                                          files                                     engine; autotag    
-                                                                                                                    pipeline           
-
-  MetaGPT                              97.5%      Yes      Multi-agent AI Multi-agent LLM      openai SDK,          Role-based         AI researchers
-  (`FoundationAgents/MetaGPT`)                             / LLM          framework modelling  pydantic, tenacity,  multi-agent        and developers
-                                                                          a software company   aiohttp, loguru,     system; SOP-driven building
-                                                                          --- agents           gitpython, faiss     action graph;      multi-agent LLM
-                                                                          collaborate to       (optional)           action             applications
-                                                                          generate software                         abstraction;       
-                                                                          artefacts                                 async-first;       
-                                                                                                                    memory hierarchy   
-  ----------------------------------------------------------------------------------------------------------------------------------------------------
+| Repository | Python % | Python Primary? | Domain | Primary Purpose | Key Dependencies | Architecture Patterns | Target Use Case |
+|------------|----------|-----------------|--------|-----------------|------------------|-----------------------|-----------------|
+| aiokafka (`aio-libs/aiokafka`) | 93.1% | Yes | Distributed Streaming | Async Python client for Apache Kafka with `AIOKafkaProducer` and `AIOKafkaConsumer` integrated with `asyncio` | async-timeout, packaging, typing-extensions, Cython, cramjam, gssapi | Async/await, layered wire protocol, optional C-extension, consumer group coordinator | Real-time event-driven microservices in Python |
+| airbyte (`airbytehq/airbyte`) | 51.3% | No | Data Integration / ELT | ELT/ETL platform with 600+ connectors | Kotlin/Gradle, airbyte-cdk, Docker, Pydantic | Polyglot platform, plugin architecture, microservices | Data centralisation into warehouses |
+| archivematica (`artefactual/archivematica`) | 83.0% | Yes | Digital Preservation | OAIS-compliant digital preservation system | Django, Celery, MySQL, FITS/JHOVE, FFmpeg | MVC, distributed task pipeline, command pattern | Archives and museums |
+| beets (`beetbox/beets`) | 96.2% | Yes | Music Library Management | CLI music manager and MusicBrainz auto-tagger | mutagen, musicbrainzngs, jellyfish, requests | Plugin system, ORM, autotag pipeline | Personal music organisation |
+| MetaGPT (`FoundationAgents/MetaGPT`) | 97.5% | Yes | Multi-agent AI / LLM | Multi-agent framework for software generation | openai, pydantic, tenacity, aiohttp, faiss | Role-based agents, SOP workflow, memory hierarchy | AI research and agent systems |
